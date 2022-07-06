@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace RestExample;
 
@@ -16,7 +17,12 @@ public class Program
             });
         
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        services.AddSwaggerGen(options => {
+            options.SwaggerDoc("v1", new OpenApiInfo {
+                Title = "Example REST WebAPI",
+                Version = "v1"
+            });
+        });
 
         services.AddDbContext<SampleDbContext>(options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Sample;Integrated Security=True;"));
 
