@@ -1,16 +1,28 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using SystemTextJsonPatch.Converters;
 
 namespace RestExample;
 
+/// <summary>
+/// Initial program entry class;
+/// </summary>
 public class Program
 {
+    /// <summary>
+    /// Initial program entry method.
+    /// </summary>
+    /// <param name="args">Arguments provided to the application.</param>
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         var services = builder.Services;
 
         services.AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonPatchDocumentConverterFactory());
+            })
             .ConfigureApiBehaviorOptions(options =>
             {
                 options.SuppressModelStateInvalidFilter = true; // It uses BadRequest not UnprocessableEntity

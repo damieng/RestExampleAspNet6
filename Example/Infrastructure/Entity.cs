@@ -1,4 +1,6 @@
-﻿namespace RestExample.Infrastructure
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RestExample.Infrastructure
 {
     /// <summary>
     /// Represents an entity within the system that has a unique identity and change tracking.
@@ -8,6 +10,7 @@
         /// <summary>
         /// Unique identifier used to reference this customer.
         /// </summary>
+        [Key]
         public Guid Id { get; set; }
 
         /// <summary>
