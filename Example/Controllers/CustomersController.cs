@@ -9,7 +9,7 @@ namespace RestExample.Controllers;
 /// </summary>
 [ApiController]
 [Route("/customers")]
-public class CustomerController : RestController<Customer>
+public class CustomerController : RestEntityController<Customer>
 {
     /// <summary>
     /// Create a new instance of <see cref="CustomerController"/>.

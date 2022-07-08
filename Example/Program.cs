@@ -28,8 +28,9 @@ public class Program
                 options.SuppressModelStateInvalidFilter = true; // It uses BadRequest not UnprocessableEntity
             });
 
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen(options =>
+        services
+            .AddEndpointsApiExplorer()
+            .AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1", new OpenApiInfo
             {
