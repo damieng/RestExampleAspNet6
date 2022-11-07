@@ -40,7 +40,7 @@ public class Program
         });
 
         services.AddDbContext<SampleDbContext>(options =>
-            options.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\src\\RestExample\\Example\\Database\\Sample.mdf;Integrated Security=True"));
+            options.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\src\\RestExample\\Database\\Sample.mdf;Integrated Security=True"));
 
         var app = builder.Build();
         if (app.Environment.IsDevelopment())

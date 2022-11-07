@@ -16,7 +16,12 @@ public class SampleDbContext : DbContext
     /// <summary>
     /// Orders stored in the database.
     /// </summary>
-    public DbSet<Order> Orders { get; init; } = null!;
+    //public DbSet<Order> Orders { get; init; } = null!;
+
+    /// <summary>
+    /// Products stored in the database.
+    /// </summary>
+    public DbSet<Product> Products { get; init; } = null!;
 
     /// <summary>
     /// Initialize a new instance of <see cref="SampleDbContext"/> with the given options.
@@ -37,9 +42,9 @@ public class SampleDbContext : DbContext
     /// <inheritdoc/>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Customer>().OwnsMany(o => o.Addresses);
+        modelBuilder.Entity<Customer>().OwnsMany(o => o.Addresses).ToTable("CustomerAddresses");
 
-        modelBuilder.Entity<Order>().OwnsOne(o => o.ShippingAddress);
-        modelBuilder.Entity<Order>().OwnsMany(o => o.OrderLines);
+        //modelBuilder.Entity<Order>().OwnsOne(o => o.ShippingAddress);
+        //modelBuilder.Entity<Order>().OwnsMany(o => o.OrderLines).ToTable("OrderLines");
     }
 }

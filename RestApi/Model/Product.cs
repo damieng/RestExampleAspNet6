@@ -1,9 +1,11 @@
-﻿namespace RestExample.Model;
+﻿using RestExample.Infrastructure;
+using System.ComponentModel.DataAnnotations;
 
+namespace RestExample.Model;
 /// <summary>
 /// Entity that represents a product.
 /// </summary>
-public class Product
+public class Product : Entity
 {
     /// <summary>
     /// Unique identifier used to reference this product.

@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace RestExample.Model;
 
@@ -16,12 +17,12 @@ public class Address
     /// <summary>
     /// Building number or name.
     /// </summary>
-    public string Building { get; set;} = null!;
+    public string? Building { get; set;} = null!;
 
     /// <summary>
     /// Street this building resides on.
     /// </summary>
-    public string Street { get; set; } = null!;
+    public string? Street { get; set; } = null!;
 
     /// <summary>
     /// City this street exists within.
@@ -32,7 +33,7 @@ public class Address
     /// <summary>
     /// Region this address resides within.
     /// </summary>
-    public string Region { get; set; } = null!;
+    public string? Region { get; set; } = null!;
 
     /// <summary>
     /// Postal or ZIP code for this address.
