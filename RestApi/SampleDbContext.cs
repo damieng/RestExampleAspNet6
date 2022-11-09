@@ -16,7 +16,7 @@ public class SampleDbContext : DbContext
     /// <summary>
     /// Orders stored in the database.
     /// </summary>
-    //public DbSet<Order> Orders { get; init; } = null!;
+    public DbSet<Order> Orders { get; init; } = null!;
 
     /// <summary>
     /// Products stored in the database.
@@ -44,7 +44,7 @@ public class SampleDbContext : DbContext
     {
         modelBuilder.Entity<Customer>().OwnsMany(o => o.Addresses).ToTable("CustomerAddresses");
 
-        //modelBuilder.Entity<Order>().OwnsOne(o => o.ShippingAddress);
-        //modelBuilder.Entity<Order>().OwnsMany(o => o.OrderLines).ToTable("OrderLines");
+        modelBuilder.Entity<Order>().OwnsOne(o => o.ShippingAddress);
+        modelBuilder.Entity<Order>().OwnsMany(o => o.OrderLines).ToTable("OrderLines");
     }
 }
