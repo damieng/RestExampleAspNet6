@@ -1,5 +1,10 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RestApi.Configuration;
+using System.Text;
 using SystemTextJsonPatch.Converters;
 
 namespace RestExample;
@@ -31,12 +36,27 @@ public class Program
         services
             .AddEndpointsApiExplorer()
             .AddSwaggerGen(options =>
-        {
-            options.SwaggerDoc("v1", new OpenApiInfo
             {
-                Title = "Example REST WebAPI",
-                Version = "v1"
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Example REST WebAPI",
+                    Version = "v1"
+                });
             });
+
+        var jwtOptions = builder.Configuration.GetSection(JwtOptions.Jwt).Get<JwtOptions>();
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+        {
+            options.RequireHttpsMetadata = false;
+            options.SaveToken = true;
+            options.TokenValidationParameters = new TokenValidationParameters()
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidAudience = jwtOptions.Audience,
+                ValidIssuer = jwtOptions.Issuer,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SecretKey))
+            };
         });
 
         services.AddDbContext<SampleDbContext>(options =>
@@ -50,6 +70,7 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+        app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
 

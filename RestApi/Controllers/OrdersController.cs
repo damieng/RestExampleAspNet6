@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestExample.Infrastructure;
 using RestExample.Model;
@@ -8,6 +9,7 @@ namespace RestExample.Controllers;
 /// REST API controller for managing <see cref="Order"/> entities.
 /// </summary>
 [ApiController]
+[Authorize]
 [Route("/orders")]
 public class OrdersController : RestEntityController<Order>
 {
